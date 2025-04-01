@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #f0f0f0;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #0a9396;
+        }
+
+        .user-greeting {
+            color: #0a9396;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .hero {
+            height: 80vh;
+            background-image: url('assets/contact.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 5%;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #0a9396;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .appointment {
+            padding: 50px 5%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #0a9396;
+        }
+
+        .form-control.error {
+            border-color: #e63946;
+        }
+
+        .error-message {
+            color: #e63946;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .find-doctor {
+            padding: 0 5% 50px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-form .form-control {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-form .btn {
+            min-width: 120px;
+        }
+
+        footer {
+            background-color: #0a9396;
+            color: white;
+            padding: 50px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: left;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px 5%;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .form-submit {
+                justify-content: center;
+            }
+            
+            .footer-content {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="assets/logo.svg" alt="Healthcare Logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="#" class="active">Service</a></li>
+                <li><a href="contact_us.html">Contact Us</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="user-greeting">Hello, Kaustubh</div>
+            <a href="index.html" class="btn btn-primary">Log Out</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Meet the Best Hospital</h1>
+            <p>We know how large objects will act, but things on a small scale.</p>
+            <div class="hero-buttons">
+                <a href="about.html" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="appointment">
+        <div class="card">
+            <h2>Book Your Appointment</h2>
+            <p>So our team can reach out to you on time</p>
+            
+            <form id="appointmentForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="Eg: John Doe" required>
+                        <div class="error-message" id="fullNameError">Please enter your full name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="doctors">Doctors</label>
+                        <select id="doctors" class="form-control" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="dr-smith">Dr. Smith</option>
+                            <option value="dr-johnson">Dr. Johnson</option>
+                            <option value="dr-williams">Dr. Williams</option>
+                        </select>
+                        <div class="error-message" id="doctorsError">Please select a doctor</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Eg: John@EmailCom" required>
+                        <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Available Date</label>
+                        <select id="date" class="form-control" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="2023-08-01">August 1, 2023</option>
+                            <option value="2023-08-02">August 2, 2023</option>
+                            <option value="2023-08-03">August 3, 2023</option>
+                        </select>
+                        <div class="error-message" id="dateError">Please select a date</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Eg: +91 5435210987" required>
+                        <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeSlot">Available Time Slot</label>
+                        <select id="timeSlot" class="form-control" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="9-10">9:00 AM - 10:00 AM</option>
+                            <option value="10-11">10:00 AM - 11:00 AM</option>
+                            <option value="11-12">11:00 AM - 12:00 PM</option>
+                        </select>
+                        <div class="error-message" id="timeSlotError">Please select a time slot</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" class="form-control" required>
+                            <option value="" disabled selected>Select</option>
+                            <option value="cardiology">Cardiology</option>
+                            <option value="neurology">Neurology</option>
+                            <option value="orthopedics">Orthopedics</option>
+                            <option value="pediatrics">Pediatrics</option>
+                        </select>
+                        <div class="error-message" id="departmentError">Please select a department</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Share Your Message</label>
+                    <textarea id="message" class="form-control" placeholder="Type Your Message"></textarea>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="btn btn-primary">Book Now &rarr;</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="find-doctor">
+        <div class="card">
+            <h2>Find a Doctor</h2>
+            
+            <form id="findDoctorForm" class="search-form">
+                <select id="specialty" class="form-control" required>
+                    <option value="" disabled selected>Speciality</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="pediatrics">Pediatrics</option>
+                </select>
+                
+                <input type="text" id="doctorName" class="form-control" placeholder="Name">
+                
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <span class="footer-logo-text">Healthcare</span>
+                </div>
+                <p class="copyright">Copyright © | All Rights Reserved</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Home</h3>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Service</h3>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+            </div>
+            
+            <div class="footer-column">
+                <h3>About Us</h3>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const appointmentForm = document.getElementById('appointmentForm');
+            const findDoctorForm = document.getElementById('findDoctorForm');
+            
+            appointmentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                const fullName = document.getElementById('fullName');
+                const fullNameError = document.getElementById('fullNameError');
+                if (!fullName.value.trim()) {
+                    fullName.classList.add('error');
+                    fullNameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    fullName.classList.remove('error');
+                    fullNameError.style.display = 'none';
+                }
+                
+                const email = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email.value)) {
+                    email.classList.add('error');
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    email.classList.remove('error');
+                    emailError.style.display = 'none';
+                }
+                
+                const phone = document.getElementById('phone');
+                const phoneError = document.getElementById('phoneError');
+                const phonePattern = /^[+]?[\d\s-]{10,15}$/;
+                if (!phonePattern.test(phone.value)) {
+                    phone.classList.add('error');
+                    phoneError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    phone.classList.remove('error');
+                    phoneError.style.display = 'none';
+                }
+                
+                const department = document.getElementById('department');
+                const departmentError = document.getElementById('departmentError');
+                if (department.value === '' || department.value === null) {
+                    department.classList.add('error');
+                    departmentError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    department.classList.remove('error');
+                    departmentError.style.display = 'none';
+                }
+                
+                const doctors = document.getElementById('doctors');
+                const doctorsError = document.getElementById('doctorsError');
+                if (doctors.value === '' || doctors.value === null) {
+                    doctors.classList.add('error');
+                    doctorsError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    doctors.classList.remove('error');
+                    doctorsError.style.display = 'none';
+                }
+                
+                const date = document.getElementById('date');
+                const dateError = document.getElementById('dateError');
+                if (date.value === '' || date.value === null) {
+                    date.classList.add('error');
+                    dateError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    date.classList.remove('error');
+                    dateError.style.display = 'none';
+                }
+                
+                
+                const timeSlot = document.getElementById('timeSlot');
+                const timeSlotError = document.getElementById('timeSlotError');
+                if (timeSlot.value === '' || timeSlot.value === null) {
+                    timeSlot.classList.add('error');
+                    timeSlotError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    timeSlot.classList.remove('error');
+                    timeSlotError.style.display = 'none';
+                }
+                
+             
+                if (isValid) {
+                    alert('Appointment booked successfully!');
+                    appointmentForm.reset();
+                }
+            });
+            
+            findDoctorForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                const specialty = document.getElementById('specialty');
+                if (specialty.value === '' || specialty.value === null) {
+                    specialty.classList.add('error');
+                    isValid = false;
+                } else {
+                    specialty.classList.remove('error');
+                }
+                
+                if (isValid) {
+                    alert('Searching for doctors...');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

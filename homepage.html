@@ -1,6 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Landing Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Landing Page</title>
     <style>
         * {
             margin: 0;
@@ -61,9 +64,13 @@
             color: #333;
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 1rem;
+        nav a:hover, nav a.active {
+            color: #0a9396;
+        }
+
+        .hello {
+            color: #008080;
+            font-weight: bolder;
         }
 
         .btn {
@@ -76,6 +83,10 @@
         .btn-primary {
             background: var(--primary);
             color: white;
+
+        }
+        .btn-primary-logout {
+            margin-left: 2rem;
         }
 
         .btn-outline {
@@ -139,7 +150,7 @@
         .stat-item h3 {
             font-size: 2.5rem;
             color: var(--primary);
-            margin-bottom: 0.5rem;  
+            margin-bottom: 0.5rem;
         }
 
         .services {
@@ -239,9 +250,17 @@
             <a href="#" class="logo">
                 <img src="assets/logo.svg" alt="Healthcare Logo">
             </a>
-            <div class="auth-buttons">
-                <a href="signup.html" class="btn btn-outline">Sign Up</a>
-                <a href="login.html" class="btn btn-primary">Log In</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="service.html">Service</a></li>
+                    <li><a href="contact_us.html">Contact Us</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+            <div class="hello">
+                <a hef="#">Hello, Kaustubh</a>
+                <a href="index.html" class="btn btn-primary btn-primary-logout">Log Out</a>
             </div>
         </div>
     </header>
@@ -251,7 +270,7 @@
             <div class="hero-text">
                 <h1>Providing Quality <span>Healthcare</span> For A <span>Brighter</span> And <span>Healthy</span> Future</h1>
                 <p style="margin-bottom: 2rem;">At Our Hospital, We Are Dedicated To Providing Exceptional Medical Care To Our Patients And Their Families.</p>
-                <a href="#" class="btn btn-primary">Appointments</a>
+                <a href="service.html" class="btn btn-primary">Appointments</a>
             </div>
             <div class="hero-image">
                 <img src="assets/doctor_home.png" alt="Healthcare Professional">
@@ -264,7 +283,6 @@
             <div class="hero-text">
                 <h1 style="color: #007e85;">You have lots of reasons to choose us</h1>
                 <p style="margin-bottom: 2rem;">At Our Hospital, We Are Dedicated To Providing Exceptional Medical Care To Our Patients And Their Families.</p>
-                <a href="#" class="btn btn-primary" style=>Get Started</a>
             </div>
             <div class="hero-image">
                 <img src="assets/home_photo2.png" alt="Healthcare Professional">
